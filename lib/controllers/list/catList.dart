@@ -16,7 +16,7 @@ class _CatList extends State<CatList> {
     @override
     Widget build(BuildContext context) {
         return GridView.count(
-            crossAxisCount: 4,
+            crossAxisCount: 3,
             children: List.generate(widget.cats.length, (index) {
                 return GestureDetector(
                     onTap: () => Navigator.of(context).pushNamed("/details", arguments: widget.cats[index]),
