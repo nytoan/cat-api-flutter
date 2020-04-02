@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 
 import 'colors.dart';
 
-import 'list.dart';
-import 'details.dart';
+import 'controllers/list/list.dart';
+import 'controllers/details/details.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,13 +20,7 @@ class MyApp extends StatelessWidget {
                             return APList();
                         },
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                            return FadeTransition(
-                                opacity: animation,
-                                child: FadeTransition(
-                                    opacity: Tween<double>(begin: 1, end: 0).animate(secondaryAnimation),
-                                    child: child,
-                                ),
-                            );
+                            return child;
                         }
                     );
                     break;
@@ -37,12 +31,10 @@ class MyApp extends StatelessWidget {
                             return APDetails(url: url);
                         },
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                            return FadeTransition(
-                                opacity: animation,
-                                child: FadeTransition(
-                                    opacity: Tween<double>(begin: 1, end: 0).animate(secondaryAnimation),
-                                    child: child,
-                                ),
+                            var tween = Tween(begin: Offset(0.0, 1.0), end: Offset.zero).chain(CurveTween(curve: Curves.easeOutQuint));
+                            return SlideTransition(
+                                position: animation.drive(tween),
+                                child: child
                             );
                         }
                     );

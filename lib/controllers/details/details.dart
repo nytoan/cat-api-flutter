@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'colors.dart';
+import '../../colors.dart';
 
 class APDetails extends StatefulWidget {
     APDetails({ this.url });
