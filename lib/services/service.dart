@@ -17,7 +17,7 @@ class Service {
 
     Future<List<Cat>> fetch() async {
         final response = await http.get(
-            "https://api.thecatapi.com/v1/images/search?limit=${this.limit}&page=0&order=Desc", 
+            "https://api.thecatapi.com/v1/images/search?limit=${this.limit}&page=0&order=Desc&mime_types=gif", 
             headers: { "x-api-key" : "90f3986b-f393-4657-acc4-1f3f18d83c44" }
         );
         parseResponse(response);
@@ -27,7 +27,7 @@ class Service {
 
     Future<List<Cat>> _fetchMore() async {
         final response = await http.get(
-            "https://api.thecatapi.com/v1/images/search?limit=${this.more}&page=${this.page}&order=Desc", 
+            "https://api.thecatapi.com/v1/images/search?limit=${this.more}&page=${this.page}&order=Desc&mime_types=gif", 
             headers: { "x-api-key" : "90f3986b-f393-4657-acc4-1f3f18d83c44" }
         );
         parseResponse(response);
