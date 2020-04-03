@@ -20,28 +20,29 @@ class _APList extends State<APList> {
     @override
     void initState() {
         super.initState();
-        futureCats = Service.fetch();
+
+        setState(() {
+            futureCats = Service.shared.fetch();          
+        });
     }
 
     @override
     Widget build(BuildContext context) {
     return Container(
         color: Colors.white,
-        child: Column(
-            children: <Widget>[
-                FutureBuilder<List<Cat>>(
-                    future: futureCats,
-                    builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                            return Flexible(
-                                child: CatList(cats: snapshot.data),
-                            );
-                        } else {
-                            return Text("Oh oh");
-                        }
-                    }
-                )
-            ],
+        child: FutureBuilder<List<Cat>>(
+            future: futureCats,
+            builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                    return Column(children: <Widget>[
+                        Flexible(
+                            child: CatList(cats: snapshot.data),
+                        )
+                    ],);
+                } else {
+                    return Center(child: Text("Loading cats..."),);
+                }
+            }
         )
     );
   }

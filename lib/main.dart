@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
                             return APDetails(cat: settings.arguments);
                         },
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                            var tween = Tween(begin: Offset(1.0, 0.0), end: Offset.zero).chain(CurveTween(curve: Curves.easeOutQuint));
+                            var tween = Tween(begin: Offset(1.0, 0.0), end: Offset.zero).chain(CurveTween(curve: Curves.easeOutCubic));
                             return SlideTransition(
                                 position: animation.drive(tween),
                                 child: child
