@@ -25,23 +25,19 @@ class Service {
         return cats;
     }
 
-    Future<List<Cat>> _fetchMore() async {
+    fetchMore() async {
+        if (!canLoadMore) {
+            return;
+        }
+        canLoadMore = false;
+        page += 1;
+        
         final response = await http.get(
             "https://api.thecatapi.com/v1/images/search?limit=${this.more}&page=${this.page}&order=Desc&mime_types=gif", 
             headers: { "x-api-key" : "90f3986b-f393-4657-acc4-1f3f18d83c44" }
         );
         parseResponse(response);
         canLoadMore = true;
-        return cats;
-    }
-
-    fetchMore() {
-        if (!canLoadMore) {
-            return;
-        }
-        canLoadMore = false;
-        page += 1;
-        return _fetchMore();
     }
 
     parseResponse(response) {

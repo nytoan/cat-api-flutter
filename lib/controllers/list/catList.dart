@@ -17,13 +17,14 @@ class CatList extends StatefulWidget {
 class _CatList extends State<CatList> {
     @override
     Widget build(BuildContext context) {
-        return NotificationListener(
-            onNotification: (scrollInfo) {
+        return NotificationListener<ScrollNotification>(
+            onNotification: (ScrollNotification scrollInfo) {
                 if(scrollInfo.metrics.extentAfter < 100) {
                     setState(() {
                         Service.shared.fetchMore();
                     });
                 }
+                return true;
             },
             child: GridView.count(
                 crossAxisCount: 3,
